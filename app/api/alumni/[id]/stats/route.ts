@@ -1,15 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Job from "@/model/Job";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
 
-    const jobsPosted = await Job.find({ postedBy: params.id });
+    const { id } = await params;
+
+    const jobsPosted = await Job.find({ postedBy: id });
     
     const totalApplications = jobsPosted.reduce(
       (sum, job) => sum + (job.registrations?.length || 0),

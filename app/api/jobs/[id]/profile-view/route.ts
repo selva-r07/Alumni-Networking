@@ -14,22 +14,21 @@ import User from "@/model/User";
 /* ── POST: record a profile view ── */
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-
+    const { id } = await params;
     const { studentId } = await req.json();
     if (!studentId) {
       return Response.json({ error: "studentId is required" }, { status: 400 });
     }
 
-    const alumni = await User.findOne({ _id: params.id, role: "alumni" });
+    const alumni = await User.findOne({ _id: id, role: "alumni" });
     if (!alumni) {
       return Response.json({ error: "Alumni not found" }, { status: 404 });
     }
 
-    // Deduplicate: only count one view per student per calendar day
     const todayStart = new Date();
     todayStart.setHours(0, 0, 0, 0);
 
@@ -52,15 +51,15 @@ export async function POST(
   }
 }
 
-/* ── GET: fetch total view count ── */
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
+    const { id } = await params;
 
-    const alumni = await User.findOne({ _id: params.id, role: "alumni" }).select("profileViews");
+    const alumni = await User.findOne({ _id: id, role: "alumni" }).select("profileViews");
     if (!alumni) {
       return Response.json({ error: "Alumni not found" }, { status: 404 });
     }

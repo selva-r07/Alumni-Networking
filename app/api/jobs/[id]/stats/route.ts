@@ -14,24 +14,23 @@ import User from "@/model/User";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
+    const { id } = await params;
 
     // All jobs posted by this alumni
-    const jobs = await Job.find({ postedBy: params.id });
+    const jobs = await Job.find({ postedBy: id });
 
     const totalJobs = jobs.length;
 
-    // Sum all registrations arrays across all jobs
     const totalApplications = jobs.reduce(
       (sum, job) => sum + (job.registrations?.length ?? 0),
       0
     );
 
-    // Profile views from User model
-    const alumni = await User.findOne({ _id: params.id, role: "alumni" }).select("profileViews");
+    const alumni = await User.findOne({ _id: id, role: "alumni" }).select("profileViews");
     const totalProfileViews = alumni?.profileViews?.length ?? 0;
 
     return Response.json(
