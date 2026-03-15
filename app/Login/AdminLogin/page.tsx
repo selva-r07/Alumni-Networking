@@ -429,8 +429,8 @@ export default function AdminLoginPage() {
             </div>
             <div className="flex flex-col gap-2">
               {[
-                { href: '/login/AlumniLogin',  Icon: GraduationCap, num: '02', label: 'Alumni Portal',  sub: 'Graduate network',    accent: '#c8a84b' },
-                { href: '/login/StudentLogin', Icon: Users,          num: '03', label: 'Student Portal', sub: 'Resources & mentors', accent: '#2d5a27' },
+                { href: '/login/alumni',  Icon: GraduationCap, num: '02', label: 'Alumni Portal',  sub: 'Graduate network',    accent: '#c8a84b' },
+                { href: '/login/student', Icon: Users,          num: '03', label: 'Student Portal', sub: 'Resources & mentors', accent: '#2d5a27' },
               ].map(({ href, Icon, num, label, sub, accent }) => (
                 <Link key={href} href={href} className="other-portal">
                   <div className="flex items-center gap-3">

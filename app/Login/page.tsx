@@ -164,7 +164,7 @@ export default function LoginPage() {
           <div className="a5 flex flex-col">
             {[
               {
-                href: '/login/AdminLogin',
+                href: '/login/admin',
                 Icon: Shield,
                 num: '01',
                 label: 'Admin Portal',
@@ -172,7 +172,7 @@ export default function LoginPage() {
                 accent: '#1a1a2e',
               },
               {
-                href: '/login/AlumniLogin',
+                href: '/login/alumni',
                 Icon: GraduationCap,
                 num: '02',
                 label: 'Alumni Portal',
@@ -180,7 +180,7 @@ export default function LoginPage() {
                 accent: '#c8a84b',
               },
               {
-                href: '/login/StudentLogin',
+                href: '/login/student',
                 Icon: Users,
                 num: '03',
                 label: 'Student Portal',
