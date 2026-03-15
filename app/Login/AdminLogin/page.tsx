@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
       setErrors({ general: error.message || 'Invalid admin credentials' });
       setLoading(false);
     } else {
-      router.push('/Dashboard/Admin/Admin1');
+      router.push('/Dashboard/Admin');
     }
   };
 

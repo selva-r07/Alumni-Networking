@@ -46,7 +46,7 @@ export default function AlumniLoginPage() {
       setErrors({ general: error.message });
       setLoading(false);
     } else {
-      router.push('../Dashboard/Alumni');
+      router.push('/Dashboard/Alumni');
     }
   };
 
